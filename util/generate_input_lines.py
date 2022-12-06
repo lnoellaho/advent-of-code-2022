@@ -1,7 +1,7 @@
-def generate_input_lines(input_file_path):
+def generate_input_lines(input_file_path, line_transformation_func=lambda x: x.strip()):
     with open(input_file_path, "r") as f:
         for line in f:
-            line = line.strip()
+            line = line_transformation_func(line)
             yield line
 
 
