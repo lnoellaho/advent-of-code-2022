@@ -1,36 +1,12 @@
 from collections import deque
 
-from util.generate_input_lines import generate_input_lines
-from day_7.directory import Directory
+from day_7.common import create_directory_tree
 
 MAX_TOTAL_DIRECTORY_SIZE = 100000
 
 
 def main():
-    root_directory = Directory(name="/", parent_directory=None)
-    current_directory = None
-
-    for terminal_output in generate_input_lines("day_7/input.txt"):
-        if terminal_output.startswith("$"):
-            if terminal_output.startswith("$ cd"):
-                terms = terminal_output.split(" ")
-                next_path = terms[-1]
-
-                if next_path == "/":
-                    current_directory = root_directory
-                elif next_path == "..":
-                    current_directory = current_directory.parent_directory
-                else:
-                    current_directory = current_directory.find_subdirectory_by_name(
-                        next_path
-                    )
-        else:
-            terms = terminal_output.split(" ")
-            if terms[0] == "dir":
-                current_directory.add_subdirectory(terms[1])
-            elif terms[0].isdigit():
-                current_directory.add_file(terms[1], int(terms[0]))
-
+    root_directory = create_directory_tree()
     total_size = _get_total_size_of_directories_that_meet_max_size(root_directory)
 
     print(total_size)
