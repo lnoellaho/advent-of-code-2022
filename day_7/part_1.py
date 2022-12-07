@@ -35,18 +35,21 @@ def main():
 
     total_size = _get_total_size_of_directories_that_meet_max_size(root_directory)
 
+
 if __name__ == "__main__":
     main()
+
 
 def _get_total_size_of_directories_that_meet_max_size(root_directory):
     total_size = 0
     current_directory = root_directory
 
     while current_directory:
-        total_directory_size = 0
-        current_directory.size
-        pass
+        current_directory_size = current_directory.get_total_size()
+        if current_directory_size <= MAX_TOTAL_DIRECTORY_SIZE:
+            total_size += current_directory_size
 
+        current_directory = alal
 
 
 class Directory:
@@ -78,7 +81,13 @@ class Directory:
             self.size += size
 
     def get_total_size(self):
-        pass
+        total_size = self.size
+
+        for subdirectory in self._subdirectories.values():
+            total_size += subdirectory.get_total_size()
+
+        return total_size
+
 
 class SubdirectoryNotFoundError(Exception):
     def __init__(self, identifier):
