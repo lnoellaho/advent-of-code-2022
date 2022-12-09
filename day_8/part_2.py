@@ -10,10 +10,10 @@ def main():
             row_idx, [int(tree_height) for tree_height in list(tree_row_input)]
         )
 
-    visible_tree_count = tree_grid.count_visible_trees()
+    highest_scenic_score = tree_grid.find_highest_scenic_score()
 
-    print(visible_tree_count)
-    # answer: 1736
+    print(highest_scenic_score)
+    # answer: 268800
 
 
 if __name__ == "__main__":
