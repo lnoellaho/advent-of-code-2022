@@ -37,45 +37,25 @@ class RopePositionTracker:
                     )
 
     def _move_knot_adjacent_to_previous_knot(self, previous_knot_id, current_knot_id):
-        if (
-            abs(
-                self._knot_positions[previous_knot_id][0]
-                - self._knot_positions[current_knot_id][0]
-            )
-            > 1
-        ) or (
-            abs(
-                self._knot_positions[previous_knot_id][1]
-                - self._knot_positions[current_knot_id][1]
-            )
-            > 1
-        ):
-            self._move_knot(previous_knot_id, current_knot_id)
+        previous_knot_x = self._knot_positions[previous_knot_id][0]
+        previous_knot_y = self._knot_positions[previous_knot_id][1]
+        current_knot_x = self._knot_positions[current_knot_id][0]
+        current_knot_y = self._knot_positions[current_knot_id][1]
 
-    def _move_knot(self, previous_knot_id, current_knot_id):
-        if (
-            self._knot_positions[previous_knot_id][0]
-            > self._knot_positions[current_knot_id][0]
+        if (abs(previous_knot_x - current_knot_x) > 1) or (
+            abs(previous_knot_y - current_knot_y) > 1
         ):
-            self._knot_positions[current_knot_id][0] += 1
+            if previous_knot_x > current_knot_x:
+                self._knot_positions[current_knot_id][0] += 1
 
-        if (
-            self._knot_positions[previous_knot_id][0]
-            < self._knot_positions[current_knot_id][0]
-        ):
-            self._knot_positions[current_knot_id][0] -= 1
+            if previous_knot_x < current_knot_x:
+                self._knot_positions[current_knot_id][0] -= 1
 
-        if (
-            self._knot_positions[previous_knot_id][1]
-            > self._knot_positions[current_knot_id][1]
-        ):
-            self._knot_positions[current_knot_id][1] += 1
+            if previous_knot_y > current_knot_y:
+                self._knot_positions[current_knot_id][1] += 1
 
-        if (
-            self._knot_positions[previous_knot_id][1]
-            < self._knot_positions[current_knot_id][1]
-        ):
-            self._knot_positions[current_knot_id][1] -= 1
+            if previous_knot_y < current_knot_y:
+                self._knot_positions[current_knot_id][1] -= 1
 
 
 # part 1 solution before part 2 came along
