@@ -3,10 +3,10 @@ from day_9.common import RopePositionTracker
 
 
 def main():
-    rope_position_tracker = RopePositionTracker([0, 0], [0, 0])
+    rope_position_tracker = RopePositionTracker(knot_count=2)
     for rope_head_motion_input in generate_input_lines("day_9/input.txt"):
         rope_head_motion = rope_head_motion_input.split(" ")
-        rope_position_tracker.move_head(rope_head_motion[0], int(rope_head_motion[1]))
+        rope_position_tracker.move_rope(rope_head_motion[0], int(rope_head_motion[1]))
 
     print(len(rope_position_tracker.unique_tail_positions))
 
